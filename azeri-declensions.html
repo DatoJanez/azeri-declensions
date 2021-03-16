@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>Azeri Declensions</title>
+        <script>
+            var get_declensions = () => {
+                let word = document.getElementById('inp').value
+                let declensions = []
+                
+                last_char = word.slice(-1)
+
+                if (last_char == 'q')       root_ = word.slice(0, -1) + 'ğ'
+                else if (last_char == 'k')  root_ = word.slice(0, -1) + 'y'
+                else                        root_ = word
+
+                if (last_char == 'a')          declensions = [ word, root_ + 'nı',   root_ + 'nın',  root_ + 'ya',  word + 'da', word + 'dan' ]
+                else if (last_char == 'ı')     declensions = [ word, root_ + 'nı',   root_ + 'nın',  root_ + 'ya',  word + 'da', word + 'dan' ]
+                else if (last_char == 'ə')     declensions = [ word, root_ + 'i',    root_ + 'in',   root_ + 'yə',  word + 'də', word + 'dən' ]
+                else if (last_char == 'e')     declensions = [ word, root_ + 'i',    root_ + 'in',   root_ + 'yə',  word + 'də', word + 'dən' ]
+                else if (last_char == 'i')     declensions = [ word, root_ + 'ni',   root_ + 'nin',  root_ + 'ə',   word + 'də', word + 'dən' ]
+                else if (last_char == 'o')     declensions = [ word, root_ + 'u',    root_ + 'un',   root_ + 'a',   word + 'da', word + 'dan' ]
+                else if (last_char == 'u')     declensions = [ word, root_ + 'nu',   root_ + 'nun',  root_ + 'a',   word + 'da', word + 'dan' ]
+                else if (last_char == 'ö')     declensions = [ word, root_ + 'ü',    root_ + 'ün',   root_ + 'ə',   word + 'də', word + 'dən' ]
+                else if (last_char == 'ü')     declensions = [ word, root_ + 'nü',   root_ + 'nün',  root_ + 'yə',  word + 'də', word + 'dən' ]
+                else                           declensions = [ word, root_ + 'i',    root_ + 'in',   root_ + 'ə',   word + 'də', word + 'dən' ]
+                
+                // let res = {"Nom.": declensions[0], "Acc": declensions[1], "Gen": declensions[2], "Dat": declensions[3], "Loc": declensions[4], "Abl:": declensions[5]}
+                document.getElementById('res').innerHTML = declensions.join('\n')
+            }
+        </script>
+    </head>
+    <body>
+        <input id="inp" onkeyup="get_declensions()"/>
+        <div id="res">
+
+        </div>
+    </body>
+</html>
