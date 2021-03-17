@@ -2,29 +2,56 @@
     <head>
         <title>Azeri Declensions</title>
         <script>
-            var get_declensions = () => {
+            var get_declensions = (word) => {
                 let word = document.getElementById('inp').value
-                let declensions = []
-                
-                last_char = word.slice(-1)
 
-                if (last_char == 'q')       root_ = word.slice(0, -1) + 'ğ'
-                else if (last_char == 'k')  root_ = word.slice(0, -1) + 'y'
-                else                        root_ = word
+                let vowels = ['i','ü','e','ö','ə','a','o','u','ı','i:','e:','ö:','ə:','a:','u:']
+                let last_char = word.slice(-1)
+                let last_vowel
 
-                if (last_char == 'a')          declensions = [ word, root_ + 'nı',   root_ + 'nın',  root_ + 'ya',  word + 'da', word + 'dan' ]
-                else if (last_char == 'ı')     declensions = [ word, root_ + 'nı',   root_ + 'nın',  root_ + 'ya',  word + 'da', word + 'dan' ]
-                else if (last_char == 'ə')     declensions = [ word, root_ + 'i',    root_ + 'in',   root_ + 'yə',  word + 'də', word + 'dən' ]
-                else if (last_char == 'e')     declensions = [ word, root_ + 'i',    root_ + 'in',   root_ + 'yə',  word + 'də', word + 'dən' ]
-                else if (last_char == 'i')     declensions = [ word, root_ + 'ni',   root_ + 'nin',  root_ + 'ə',   word + 'də', word + 'dən' ]
-                else if (last_char == 'o')     declensions = [ word, root_ + 'u',    root_ + 'un',   root_ + 'a',   word + 'da', word + 'dan' ]
-                else if (last_char == 'u')     declensions = [ word, root_ + 'nu',   root_ + 'nun',  root_ + 'a',   word + 'da', word + 'dan' ]
-                else if (last_char == 'ö')     declensions = [ word, root_ + 'ü',    root_ + 'ün',   root_ + 'ə',   word + 'də', word + 'dən' ]
-                else if (last_char == 'ü')     declensions = [ word, root_ + 'nü',   root_ + 'nün',  root_ + 'yə',  word + 'də', word + 'dən' ]
-                else                           declensions = [ word, root_ + 'i',    root_ + 'in',   root_ + 'ə',   word + 'də', word + 'dən' ]
-                
-                // let res = {"Nom.": declensions[0], "Acc": declensions[1], "Gen": declensions[2], "Dat": declensions[3], "Loc": declensions[4], "Abl:": declensions[5]}
-                document.getElementById('res').innerHTML = declensions.join('\n')
+                for(let i = word.length; i > 0; i--){
+                    let char = word.slice(i-1, i)
+                    if(vowels.indexOf(char) !== -1){
+                        last_vowel = char
+                        break
+                    }
+                }
+
+                if (!last_vowel) Error('last vowel not found')
+
+                root_ = last_char == 'q' 
+                    ? word.slice(0,-1) + 'ğ' 
+                    : last_char == 'k' 
+                        ? word.slice(0,-1) + 'y'
+                        : word
+
+                if(vowels.indexOf(last_char) !== -1){
+                    if (['ə', 'e', 'i'].indexOf(last_vowel) !== -1)     declensions = ['i', 'in', 'ə', 'də', 'dən']
+                    if (['ö', 'ü' ].indexOf(last_vowel) !== -1)         declensions = ['ü', 'ün', 'ə', 'də', 'dən']
+                    if (['a', 'ı' ].indexOf(last_vowel) !== -1)         declensions = ['ı', 'ın', 'a', 'da', 'dan']
+                    if (['o', 'u' ].indexOf(last_vowel) !== -1)         declensions = ['u', 'un', 'a', 'da', 'dan']
+                } else {
+                    if (['ə', 'e', 'i'].indexOf(last_vowel) !== -1)     declensions = ['ni', 'nin', 'yə', 'də', 'dən']
+                    if (['ö', 'ü' ].indexOf(last_vowel) !== -1)         declensions = ['nü', 'nün', 'yə', 'də', 'dən']
+                    if (['a', 'ı' ].indexOf(last_vowel) !== -1)         declensions = ['nı', 'nın', 'ya', 'da', 'dan']
+                    if (['o', 'u' ].indexOf(last_vowel) !== -1)         declensions = ['nu', 'nun', 'ya', 'da', 'dan']
+                }
+                // return {
+                //     "Nom."  : word, 
+                //     "Acc"   : root_ + declensions[0], 
+                //     "Gen"   : root_ + declensions[1], 
+                //     "Dat"   : root_ + declensions[2], 
+                //     "Loc"   : word  + declensions[3], 
+                //     "Abl:"  : word  + declensions[4]
+                // }
+                return [
+                    word, 
+                    root_ + declensions[0], 
+                    root_ + declensions[1], 
+                    root_ + declensions[2], 
+                    word  + declensions[3], 
+                    word  + declensions[4]
+                ]
             }
         </script>
     </head>
