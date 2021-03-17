@@ -36,22 +36,31 @@
                     if (['a', 'ı' ].indexOf(last_vowel) !== -1)         declensions = ['nı', 'nın', 'ya', 'da', 'dan']
                     if (['o', 'u' ].indexOf(last_vowel) !== -1)         declensions = ['nu', 'nun', 'ya', 'da', 'dan']
                 }
-                // return {
-                //     "Nom."  : word, 
-                //     "Acc"   : root_ + declensions[0], 
-                //     "Gen"   : root_ + declensions[1], 
-                //     "Dat"   : root_ + declensions[2], 
-                //     "Loc"   : word  + declensions[3], 
-                //     "Abl:"  : word  + declensions[4]
-                // }
-                return [
+                document.getElementById('res').innerHTML =  [
                     word, 
                     root_ + declensions[0], 
                     root_ + declensions[1], 
                     root_ + declensions[2], 
                     word  + declensions[3], 
                     word  + declensions[4]
-                ]
+                ].join(',')
+
+//                  {
+//                     "Nom."  : word, 
+//                     "Acc"   : root_ + declensions[0], 
+//                     "Gen"   : root_ + declensions[1], 
+//                     "Dat"   : root_ + declensions[2], 
+//                     "Loc"   : word  + declensions[3], 
+//                     "Abl:"  : word  + declensions[4]
+//                 }
+//                 return [
+//                     word, 
+//                     root_ + declensions[0], 
+//                     root_ + declensions[1], 
+//                     root_ + declensions[2], 
+//                     word  + declensions[3], 
+//                     word  + declensions[4]
+//                 ]
             }
         </script>
     </head>
