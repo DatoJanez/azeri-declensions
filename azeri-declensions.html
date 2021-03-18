@@ -25,7 +25,7 @@
                         ? word.slice(0,-1) + 'y'
                         : word
 
-                if(vowels.indexOf(last_char) !== -1){
+                if(vowels.indexOf(last_char) === -1){
                     if (['ə', 'e', 'i'].indexOf(last_vowel) !== -1)     declensions = ['i', 'in', 'ə', 'də', 'dən']
                     if (['ö', 'ü' ].indexOf(last_vowel) !== -1)         declensions = ['ü', 'ün', 'ə', 'də', 'dən']
                     if (['a', 'ı' ].indexOf(last_vowel) !== -1)         declensions = ['ı', 'ın', 'a', 'da', 'dan']
